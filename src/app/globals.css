@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+/* The palette of an electricity meter panel: cool grey-green panel, dark number drums,
+   and a price ramp that goes from cool to hot as the price per kWh rises. */
+:root {
+  --paper: #e9efec;
+  --surface: #f7faf8;
+  --ink: #17211f;
+  --muted: #56645f;
+  --line: #c9d4d0;
+  --drum: #1b2321;
+  --drum-digit: #f4f7f6;
+  --alert: #c2381f;
+  --alert-soft: #f8e1d9;
+
+  --tier-1: #2e8b7a;
+  --tier-2: #4c9a6a;
+  --tier-3: #8fa94b;
+  --tier-4: #d29a1d;
+  --tier-5: #df7a1f;
+  --tier-6: #cf4a2c;
+  --tier-7: #962a2b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0f1513;
+    --surface: #161f1d;
+    --ink: #e3ece9;
+    --muted: #93a39f;
+    --line: #2b3734;
+    --drum: #060a09;
+    --drum-digit: #f4f7f6;
+    --alert: #f2735a;
+    --alert-soft: #3a1e17;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-drum: var(--drum);
+  --color-drum-digit: var(--drum-digit);
+  --color-alert: var(--alert);
+  --color-alert-soft: var(--alert-soft);
+  --font-sans: var(--font-readex);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* The meter's number drums roll to the new digit; no motion for people who asked for less. */
+.drum-column {
+  transition: transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .drum-column {
+    transition: none;
+  }
+}
